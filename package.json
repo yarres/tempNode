@@ -1,0 +1,28 @@
+{
+  "name": "test-node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "dotenv": "^2.0.0",
+    "express": "^4.14.0",
+    "express-session": "^1.14.2",
+    "feedparser": "^2.0.0",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2",
+    "lodash": "^4.17.3",
+    "mongoose": "^4.7.5",
+    "path": "^0.12.7",
+    "pug": "^2.0.0-beta6"
+  },
+  "devDependencies": {
+    "mocha": "^3.2.0"
+  },
+  "scripts": {
+    "test": "mocha test",
+    "start": "node index.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
