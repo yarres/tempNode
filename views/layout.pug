@@ -9,8 +9,11 @@ html
     title #{title} - Hackathon Starter
     link(rel='shortcut icon', href='/favicon.png')
     link(rel='stylesheet', href='/css/main.css')
+    script src="public/js/lib/angular/angular.min.js"
+    script src="public/js/lib/angular-route/angular-route.min.js"
+    script src="public/js/bandFrontController.js"
 
-  body
+  body(ng-app="sampleApp" ng-controller="bandController")
     include partials/header
 
     .container

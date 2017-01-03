@@ -27,12 +27,10 @@ block content
 
     h3 Arrays
     img(src='landscape_small.jpg')
-    ul
-      each val, index in bands
-        li= val.name
-          p= val.country
+    div(ng-view)
     h3 Arrays fetched from mongo
     ul
+      if fetchedBands.length > 0
       each val, index in fetchedBands
         li= val.name
           p= 'Country:' + ' ' + val.country

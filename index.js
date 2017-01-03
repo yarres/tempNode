@@ -85,6 +85,10 @@ const crawlRSSController = require('./controllers/rss');
 const streamController = require('./controllers/stream');
 const testFileController = require('./controllers/testFile');
 const arraysController = require('./controllers/arrays');
+const apiBandController = require('./controllers/apiBand');
+
+const frontController = require('./public/js/bandFrontController');
+
 
 //express settings
 
@@ -103,6 +107,11 @@ app.get('/testFile', testFileController.getFile);
 app.get('/arrays', arraysController.getArrays);
 app.post('/arrays', arraysController.postBand);
 
+
+/**
+* Api routes
+*/
+app.get('/api/bands', apiBandController.getBands);
 
 app.get('/', function(request, response) {
   response.send('Hello from Express!');

@@ -40,4 +40,7 @@ bands = pipeline_each(
 
 //console.log(JSON.stringify(bands));
 
-module.exports.sum = sum;
+module.exports.set_canada_as_country = set_canada_as_country;
+module.exports.strip_punctuation_from_name = strip_punctuation_from_name;
+module.exports.capitalize_names = capitalize_names;
+module.exports.pipeline_each = pipeline_each;
