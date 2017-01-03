@@ -1,0 +1,39 @@
+extends layout
+
+block content
+  .page-header
+    h3 Create a new band
+
+  form.form-horizontal(method='POST')
+    .form-group
+      label(class='col-sm-2 control-label', for='name') Name
+      .col-sm-8
+        input.form-control(type='text', name='name', id='name', autofocus=true)
+    .form-group
+      label(class='col-sm-2 control-label', for='country') Country
+      .col-sm-8
+        input.form-control(type='text', name='country', id='country')
+    .form-group
+      label(class='col-sm-2 control-label', for='rank') Rank
+      .col-sm-8
+        input.form-control(type='number', name='rank', id='rank')
+    .form-group
+      .col-sm-offset-2.col-sm-8
+        button.btn.btn-primary(type='submit')
+          i.fa.fa-envelope
+          | Create a new band
+
+
+
+    h3 Arrays
+    img(src='landscape_small.jpg')
+    ul
+      each val, index in bands
+        li= val.name
+          p= val.country
+    h3 Arrays fetched from mongo
+    ul
+      each val, index in fetchedBands
+        li= val.name
+          p= 'Country:' + ' ' + val.country
+          p= 'Rank:' + ' ' + val.rank
