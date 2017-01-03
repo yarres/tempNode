@@ -2,23 +2,54 @@ require('./app/index');
 const express = require('express');
 const app = express();
 const session = require('express-session');
-const path = require('path')
+const path = require('path');
+const flash = require('express-flash');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+const MongoStore = require('connect-mongo')(session);
 const port = 3000;
 const chalk = require('chalk');
 const bodyParser = require('body-parser')
+const validator = require('express-validator');
 
+// Environment config file
+dotenv.load({ path: '.env.example' });
 /**
  * Connect to MongoDB.
  */
 mongoose.Promise = global.Promise;
 const mongoUri = "mongodb://localhost:27017/tutorial";
-mongoose.connect(mongoUri);
+mongoose.connect(process.env.MONGODB_URI);
 mongoose.connection.on('error', () => {
   console.log('%s MongoDB connection error. Please make sure MongoDB is running.', chalk.red('✗'));
   process.exit();
 });
+
+///////////////////////////////////////////////////////////////////////////////////////////:
+// Setup models here for now
+//var Band = mongoose.model('Band', {name: String, country: String, rank: Number});
+
+/**
+ * Lets Use our Models
+ * */
+
+//Lets create a new user
+//var band1 = new Band({name: 'The Doors', country: 'usa', rank: 1});
+
+//Some modifications in user object
+//band1.name = band1.name.toUpperCase();
+
+//Lets try to print and see it. You will see _id is assigned.
+//console.log(band1);
+
+//Lets save it
+// band1.save(function (err, userObj) {
+//   if (err) {
+//     console.log(err);
+//   } else {
+//     console.log('saved successfully:', userObj);
+//   }
+// });
 
 const gulp = require('gulp');
 gulp.task('default', function() {
@@ -26,12 +57,26 @@ gulp.task('default', function() {
 });
 
 
+
 var babel = require("gulp-babel");
 
-app.use(bodyParser.urlencoded({
-    extended: true
+// app.use(bodyParser.urlencoded({
+//     extended: true
+// }));
+
+app.use(session({
+  resave: true,
+  saveUninitialized: true,
+  secret: process.env.SESSION_SECRET,
+  store: new MongoStore({
+    url: process.env.MONGODB_URI || process.env.MONGOLAB_URI,
+    autoReconnect: true
+  })
 }));
 
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(validator()); // input validation
+app.use(flash());
 /**
  * Controllers (route handlers).
  */
@@ -39,6 +84,7 @@ const homeController = require('./controllers/home');
 const crawlRSSController = require('./controllers/rss');
 const streamController = require('./controllers/stream');
 const testFileController = require('./controllers/testFile');
+const arraysController = require('./controllers/arrays');
 
 //express settings
 
@@ -54,6 +100,8 @@ app.get('/rss', crawlRSSController.getRSS);
 app.post('/rss', crawlRSSController.postRSS);
 app.get('/stream', streamController.getStream);
 app.get('/testFile', testFileController.getFile);
+app.get('/arrays', arraysController.getArrays);
+app.post('/arrays', arraysController.postBand);
 
 
 app.get('/', function(request, response) {
