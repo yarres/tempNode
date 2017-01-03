@@ -38,6 +38,7 @@ app.use(bodyParser.urlencoded({
 const homeController = require('./controllers/home');
 const crawlRSSController = require('./controllers/rss');
 const streamController = require('./controllers/stream');
+const testFileController = require('./controllers/testFile');
 
 //express settings
 
@@ -52,6 +53,7 @@ app.get('/', homeController.index);
 app.get('/rss', crawlRSSController.getRSS);
 app.post('/rss', crawlRSSController.postRSS);
 app.get('/stream', streamController.getStream);
+app.get('/testFile', testFileController.getFile);
 
 
 app.get('/', function(request, response) {
