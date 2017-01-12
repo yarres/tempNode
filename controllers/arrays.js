@@ -63,7 +63,7 @@ bands = pipeline_each(
  */
 exports.getArrays = (req, res) => {
   res.render('arrays', {
-    title: 'Arrays',
+    title: 'Bands',
     bands: bands,
     tempBands: fetchedBands
   });
@@ -75,6 +75,7 @@ exports.getArrays = (req, res) => {
  */
 exports.postBand = (req, res) => {
   req.assert('name', 'Name cannot be blank').notEmpty();
+  req.assert('country', 'Country cannot be blank').notEmpty();
 
   // Validation
  const errors = req.validationErrors();

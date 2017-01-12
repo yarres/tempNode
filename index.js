@@ -11,6 +11,7 @@ const port = 3000;
 const chalk = require('chalk');
 const bodyParser = require('body-parser')
 const validator = require('express-validator');
+const helmet = require('helmet');
 
 // Environment config file
 dotenv.load({ path: '.env.example' });
@@ -63,6 +64,8 @@ var babel = require("gulp-babel");
 // app.use(bodyParser.urlencoded({
 //     extended: true
 // }));
+
+app.use(helmet());
 
 app.use(session({
   resave: true,

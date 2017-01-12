@@ -3,6 +3,10 @@ extends layout
 block content
   .page-header
     h3 Create a new band
+    if messages.errors
+      .alert.alert-danger.fade.in
+        for error in messages.errors
+          div= error.msg
 
   form.form-horizontal(method='POST')
     .form-group
@@ -22,7 +26,6 @@ block content
         button.btn.btn-primary(type='submit')
           i.fa.fa-envelope
           | Create a new band
-
 
 
     h3 Arrays
