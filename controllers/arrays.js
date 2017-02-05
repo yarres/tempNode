@@ -1,13 +1,14 @@
  const Band = require('../models/Band');
 
-fetchedBands = [];
-Band.findOne({'name':'THE DOORS'}, function(err, bandF) {
-    if (!err){
-      fetchedBands.push(bandF);
-      //  console.log(bands);
-        //process.exit();
-    } else {throw err;}
-});
+var fetchedBands = [];
+
+// Band.find({}, function(err, bandF) {
+//     if (!err){
+//       console.log(bandF);
+//       fetchedBands.push(bandF);
+//       //  console.log(bands);
+//     } else {throw err;}
+// });
 
 console.log(fetchedBands);
 //console.log(bandF);
@@ -52,23 +53,22 @@ bands = pipeline_each(
   [set_canada_as_country, strip_punctuation_from_name, capitalize_names]
 );
 
-//console.log(JSON.stringify(bands));
-
-
-
+// console.log(JSON.stringify(bands));
 
 /**
  * GET /contact
  * Contact form page.
  */
-exports.getArrays = (req, res) => {
-  res.render('arrays', {
-    title: 'Bands',
-    bands: bands,
-    tempBands: fetchedBands
-  });
-};
-
+ exports.getArrays = (req, res) => {
+   Band.find({}, (err, bandF) => {
+     if (!err) {
+       res.render('arrays', {
+         title: 'Bands',
+         fetchedBands: bandF
+       });
+     } else { throw err; }
+   });
+ };
 /**
  * POST /contact
  * Send a contact form via Nodemailer.
@@ -84,7 +84,7 @@ exports.postBand = (req, res) => {
    return res.redirect('/arrays');
 }
 
-
+console.log(req.body.name);
   // create a new Band
   var band1 = new Band(
     {

@@ -33,8 +33,15 @@ block content
     div(ng-view)
     h3 Arrays fetched from mongo
     ul
-      if fetchedBands.length > 0
-      each val, index in fetchedBands
-        li= val.name
-          p= 'Country:' + ' ' + val.country
-          p= 'Rank:' + ' ' + val.rank
+      if fetchedBands !== undefined
+        if fetchedBands.length > 0
+        each val, index in fetchedBands
+          li= val.name
+            p= 'Country:' + ' ' + val.country
+            p= 'Rank:' + ' ' + val.rank
+      if tempBands !== undefined
+        if tempBands.length > 0
+        each val, index in tempBands
+          li= val.name
+            p= 'Country:' + ' ' + val.country
+            p= 'Rank:' + ' ' + val.rank
