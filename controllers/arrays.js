@@ -2,13 +2,58 @@
 
 var fetchedBands = [];
 
-// Band.find({}, function(err, bandF) {
-//     if (!err){
-//       console.log(bandF);
-//       fetchedBands.push(bandF);
-//       //  console.log(bands);
-//     } else {throw err;}
-// });
+const usersList = [
+  {
+    name: 'Herbert',
+    id: 1
+  },
+  {
+    name: 'John',
+    id: 2
+  },
+  {
+    name: 'Philip',
+    id: 3
+  }
+];
+
+ const ids = [
+   1, 3
+ ];
+
+ const findIdInArray = (array, element) => {
+   if (array.indexOf(element.id) !== -1) {
+     return true;
+   }
+   return false;
+ };
+
+ // Get the name corresponding to 1 and 3
+ const returned = [];
+ usersList.forEach((element) => {
+   if (findIdInArray(ids, element)) {
+     const tempElement = { name: element.name, id: element.id };
+     returned.push(tempElement);
+   }
+ });
+
+ console.log(returned);
+
+ // TODO: do the same with a filter
+
+
+//   Result : [ {
+//   name: 'Herbert',
+//   id: 1,
+// },
+// {
+//   name: 'Philip',
+//   id: 3
+// }
+// ]
+
+
+
 
 console.log(fetchedBands);
 //console.log(bandF);
